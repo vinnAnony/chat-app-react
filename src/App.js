@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar";
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <div className="app_body">
         <Sidebar />
         <Chat />
