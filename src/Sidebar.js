@@ -1,15 +1,33 @@
 import React from "react";
 import "./Sidebar.css";
-import { DonutLarge } from "@mui/icons-material";
+import { DonutLarge, SearchOutlined } from "@mui/icons-material";
+import ChatIcon from "@mui/icons-material/Chat"
+import MoreVertIcon from "@mui/icons-material/MoreVert"
+import {Avatar,IconButton} from "@mui/material"
 
 function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar__header">
+        <Avatar src=""/>
         <div className="sidebar__headerRight">
-          <DonutLarge />
+          <IconButton>
+            <DonutLarge />
+          </IconButton>      
+          <IconButton>
+            <ChatIcon />
+          </IconButton>      
+          <IconButton>
+            <MoreVertIcon />
+          </IconButton>      
         </div>
       </div>
+      <div className="sidebar__search">
+          <div className="sidebar__searchContainer">
+            <SearchOutlined/>
+            <input placeholder="Search or start new chat" type="text"/>
+          </div>
+        </div>
     </div>
   );
 }
