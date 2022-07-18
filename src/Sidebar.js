@@ -10,7 +10,7 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar__header">
-        <Avatar src=""/>
+        <Avatar src="https://vinnjeru.com/images/vinn-bg.jpg"/>
         <div className="sidebar__headerRight">
           <IconButton>
             <DonutLarge />
