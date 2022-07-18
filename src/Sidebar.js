@@ -4,6 +4,7 @@ import { DonutLarge, SearchOutlined } from "@mui/icons-material";
 import ChatIcon from "@mui/icons-material/Chat"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
 import {Avatar,IconButton} from "@mui/material"
+import SidebarChat from "./SidebarChat";
 
 function Sidebar() {
   return (
