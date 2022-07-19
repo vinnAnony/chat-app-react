@@ -1,5 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import Pusher from 'pusher'
 
 import Messages from './dbMessages.js'
 
@@ -11,11 +12,41 @@ const port = process.env.PORT || 9000
 app.use(express.json());
 
 // db config
+
+const pusher = new Pusher({
+    appId: "1439441",
+    key: "0e6f8a1400d4484ca992",
+    secret: "0d5b98701a2ce0c77760",
+    cluster: "mt1",
+    useTLS: true
+});
+
 const connection_url = 'mongodb+srv://admin:G0xdPZyfyqoZ0We1@cluster0.noy1kfj.mongodb.net/chatappdb?retryWrites=true&w=majority'
 mongoose.connect(connection_url,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
-})
+});
+
+const db = mongoose.connection;
+db.once('open', () => {
+    console.log('DB connected');
+    const msgCollection = db.collection('messagecontents');
+    const changeStream = msgCollection.watch();
+
+    changeStream.on('change',(change) => {
+        console.log('changed',change);
+
+        if (change.operationType === 'insert') {
+            const messageDetails = change.fullDocument;
+            pusher.trigger('messages', "inserted", {
+                user:messageDetails.name,
+                message:messageDetails.message
+            })
+        } else {
+            console.log('Error triggering Pusher');
+        }
+    });
+});
 
 // api routes
 app.get('/',(req,res) => {res.status(200).send('hello world')});
