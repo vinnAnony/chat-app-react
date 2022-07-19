@@ -41,8 +41,10 @@ db.once('open', () => {
         if (change.operationType === 'insert') {
             const messageDetails = change.fullDocument;
             pusher.trigger('messages', "inserted", {
-                user:messageDetails.name,
-                message:messageDetails.message
+                user: messageDetails.name,
+                message: messageDetails.message,
+                timestamp: messageDetails.timestamp,
+                received: messageDetails.received
             })
         } else {
             console.log('Error triggering Pusher');
