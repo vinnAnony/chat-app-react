@@ -2,7 +2,12 @@ import express from 'express'
 import mongoose from 'mongoose'
 import Pusher from 'pusher'
 import cors from 'cors'
+import dotenv from 'dotenv'
 
+
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+  }
 
 // app config
 const app = express()
@@ -15,14 +20,14 @@ app.use(cors());
 // db config
 
 const pusher = new Pusher({
-    appId: "1439441",
-    key: "0e6f8a1400d4484ca992",
-    secret: "0d5b98701a2ce0c77760",
-    cluster: "mt1",
-    useTLS: true
+    appId: process.env.PUSHER_APP_ID,
+    key: process.env.PUSHER_KEY,
+    secret: process.env.PUSHER_SECRET,
+    cluster: process.env.PUSHER_CLUSTER,
+    useTLS: process.env.PUSHER_USE_TLS
 });
 
-const connection_url = 'mongodb+srv://admin:G0xdPZyfyqoZ0We1@cluster0.noy1kfj.mongodb.net/chatappdb?retryWrites=true&w=majority'
+const connection_url = process.env.MONGOOSE_URI
 mongoose.connect(connection_url,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
