@@ -3,7 +3,6 @@ import mongoose from 'mongoose'
 import Pusher from 'pusher'
 import cors from 'cors'
 
-import Messages from './dbMessages.js'
 
 // app config
 const app = express()
@@ -53,28 +52,8 @@ db.once('open', () => {
 });
 
 // api routes
-app.get('/',(req,res) => {res.status(200).send('hello world')});
-app.post('/api/v1/messages/new',(req,res) => {
-    const dbMessage = req.body
-
-    Messages.create(dbMessage, (err, data) => {
-        if (err) {
-            res.status(500).send(err)
-        } else {
-            res.status(201).send(data)
-        }
-    })
-});
-app.get('/api/v1/messages/sync',(req,res) => {
-
-    Messages.find((err, data) => {
-        if (err) {
-            res.status(500).send(err)
-        } else {
-            res.status(200).send(data)
-        }
-    })
-});
+import messagesRoute from './controllers/message.controller.js';
+app.use('/api/v1/messages', messagesRoute);
 
 // listen
 app.listen(port,() => {console.log(`Listening to port:${port}`);})
