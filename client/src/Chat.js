@@ -45,7 +45,7 @@ const [messageInput, setMessageInput] = useState("")
        <div className="chat__body">
 
          {messages.map((message) => {
-          return(<p className={`chat__message ${message.received && "chat__receiver"}`}>
+          return(<p className={`chat__message ${!message.received && "chat__receiver"}`}>
             <span className="chat__name">{message.name}</span>
             {message.message}
             <span className="chat__timestamp">
