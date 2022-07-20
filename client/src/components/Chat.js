@@ -2,8 +2,8 @@ import { Avatar,IconButton } from '@mui/material'
 import { SearchOutlined,AttachFile,MoreVert,InsertEmoticon } from "@mui/icons-material";
 import MicIcon from "@mui/icons-material/Mic";
 import React, { useState } from 'react'
-import "./Chat.css"
-import axios from './axios';
+import "./css/Chat.css"
+import axios from '../utils/axios';
 
 function Chat({messages}) {
 const [messageInput, setMessageInput] = useState("")

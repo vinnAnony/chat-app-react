@@ -1,6 +1,6 @@
 import { Avatar } from '@mui/material'
 import React from 'react'
-import "./SidebarChat.css"
+import "./css/SidebarChat.css"
 
 function SidebarChat() {
     return (
